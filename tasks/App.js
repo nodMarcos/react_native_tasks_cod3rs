@@ -1,6 +1,6 @@
-import TaskList from './src/screens/TasksList';
 import { useFonts } from '@use-expo/font'
 import AppLoading from 'expo-app-loading';
+import Navigator from './src/navigator';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -12,7 +12,7 @@ export default function App() {
   }
 
   return (
-    <TaskList />
+    <Navigator />
   );
 }
 
