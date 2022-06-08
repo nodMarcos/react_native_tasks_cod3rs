@@ -1,16 +1,16 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import Auth from './screens/Auth'
-import TaskList from './screens/TaskList'
+import TaskList from './screens/TasksList'
 
-import AuthOrApp from './screens/AuthOrApp'
-import Menu from './screens/Menu'
+// import AuthOrApp from './screens/AuthOrApp'
+// import Menu from './screens/Menu'
 import commonStyles from './commonStyles'
+import { NavigationContainer } from '@react-navigation/native';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const menuConfig = {
@@ -45,9 +45,9 @@ const DrawerNavigator = props => {
 const AuthNavigator = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="AuthOrApp" component={AuthOrApp} />
+            {/* <Stack.Screen name="AuthOrApp" component={AuthOrApp} /> */}
             <Stack.Screen name="Auth" component={Auth} />
-            <Stack.Screen name="Home" component={DrawerNavigator} />
+            <Stack.Screen name="Home" component={TaskList} />
         </Stack.Navigator>
     );
 };
