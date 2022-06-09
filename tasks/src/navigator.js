@@ -1,12 +1,10 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-
 import Auth from './screens/Auth'
 import TaskList from './screens/TasksList'
-
-// import AuthOrApp from './screens/AuthOrApp'
-// import Menu from './screens/Menu'
+import AuthOrApp from './screens/AuthOrApp'
+import Menu from './screens/Menu'
 import commonStyles from './commonStyles'
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -20,12 +18,14 @@ const menuConfig = {
         fontSize: 20
     },
     activeTintColor: '#080',
+    headerShown: false
+
 }
 
 const DrawerNavigator = props => {
     const { email, name } = props.route.params
     return (
-        <Drawer.Navigator drawerContentOptions={menuConfig} drawerContent={(props) => <Menu {...props} email={email} name={name} />}>
+        <Drawer.Navigator screenOptions={menuConfig} drawerContent={(props) => <Menu {...props} email={email} name={name} />}>
             <Drawer.Screen name="Today" options={{ title: 'Hoje' }}>
                 {props => <TaskList {...props} title='Hoje' daysAhead={0} />}
             </Drawer.Screen>
@@ -44,10 +44,10 @@ const DrawerNavigator = props => {
 
 const AuthNavigator = () => {
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-            {/* <Stack.Screen name="AuthOrApp" component={AuthOrApp} /> */}
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='AuthOrApp'>
+            <Stack.Screen name="AuthOrApp" component={AuthOrApp}  />
             <Stack.Screen name="Auth" component={Auth} />
-            <Stack.Screen name="Home" component={TaskList} />
+            <Stack.Screen name="Home" component={DrawerNavigator} />
         </Stack.Navigator>
     );
 };

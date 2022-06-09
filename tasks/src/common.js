@@ -1,9 +1,14 @@
 import {Alert, Platform} from 'react-native';
 
-const server = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://192.168.15.13:3000';
+const server = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://192.168.15.15:3000';
 
 function showError(err) {
-  Alert.alert('Ops! Ocorreu um erro inesperado', 'Mensagem: ' + err.message);
+  if (err.response && err.response.data) {
+    Alert.alert('Ops! Ocorreu um erro inesperado', 'Mensagem: ' + err.response.data);
+  }
+  else {
+    Alert.alert('Ops! Ocorreu um erro inesperado', 'Mensagem: ' + err );
+  }
 }
 
 function showSuccess(message) {
